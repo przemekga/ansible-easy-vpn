@@ -178,7 +178,11 @@ if [[ "$custom_filled" =~ "custom.yml" ]]; then
   echo "If you want to change something (e.g. username, domain name, etc.)"
   echo "Please edit custom.yml or secret.yml manually, and then re-run this script"
   echo
-  cd $HOME/ansible-easy-vpn && ansible-playbook --ask-vault-pass run.yml
+  if [[ $EUID -ne 0 ]]; then
+    cd $HOME/ansible-easy-vpn && ansible-playbook --ask-vault-pass -K run.yml
+  else
+    cd $HOME/ansible-easy-vpn && ansible-playbook --ask-vault-pass run.yml
+  fi
   exit 0
 fi
 
