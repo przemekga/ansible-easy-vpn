@@ -3,6 +3,6 @@ pyOpenSSL
 certbot
 requests<2.29.2
 passlib 
-bcrypt 
+bcrypt<4.0.0
 wheel
 ansible>=4.10
